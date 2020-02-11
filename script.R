@@ -49,13 +49,26 @@ create_mult_df_weak <- function(my_df){
   return(my_data)
 }
 
+# creating a wrapper function to wrap the title text
+wrapper <- function(x, ...) 
+{
+  paste(strwrap(x, ...), collapse = "\n")
+}
+
 my_scatter_graph <- function(df, labx, laby, title) {
   set.seed(1234)
   colnames(df) <- c("x", "y")
   df %>%
     ggplot(aes(x = x, y = y)) +
     geom_point() +
-    labs(x = labx, y = laby, title = title)
+    labs(x = labx, y = laby) +
+    theme(text = element_text(size = 18),
+          panel.grid = element_blank(),
+          panel.background = element_rect(fill = "white"),
+          panel.border = element_rect(colour = "black", fill = NA)) +
+  ggtitle(wrapper(title, width = 43))
+    
+  
 }
 
 # the following function takes a graph and saves it in the graphs folder, 
@@ -124,3 +137,4 @@ for(index in my_graphs$graph_id) {
                           my_graphs[my_graphs$graph_id == index,]$title_no) %>%
     save_graph_weak_no()
 }
+
