@@ -2,7 +2,7 @@ library(tidyverse)
 library(MASS)
 
 create_mult_df_strong <- function(my_df){
-  set.seed(1234)
+  set.seed(1234+index)
   
   mean1 <- my_df$mean_x
   mean2 <- my_df$mean_y
@@ -26,7 +26,7 @@ create_mult_df_strong <- function(my_df){
 }
 
 create_mult_df_weak <- function(my_df){
-  set.seed(1234)
+  set.seed(1234+index)
   
   mean1 <- my_df$mean_x
   mean2 <- my_df$mean_y
@@ -56,7 +56,7 @@ wrapper <- function(x, ...)
 }
 
 my_scatter_graph <- function(df, labx, laby, title) {
-  set.seed(1234)
+  set.seed(1234+index)
   colnames(df) <- c("x", "y")
   df %>%
     ggplot(aes(x = x, y = y)) +
